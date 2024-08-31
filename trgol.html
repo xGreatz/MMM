@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>!</title>
+  </head>
+  <body>
+    <br />
+    put any number here >
+    <input type="number" id="number-input" required placeholder="הכנס מספרים" />
+    <button id="add-number">הוסף למערך</button>
+    <button id="clip-board">העתקת המספר ל clipboard</button>
+    <button id="check-numbers">בודק אם כל המספרים מתחת ל-30</button>
+    <button id="multiply-numbers">הכפלת כל המספרים ב 3</button>
+
+    <p id="output"></p>
+    <p id="new-arr"></p>
+
+    <script>
+      const paragraph = document.getElementById("output");
+      const inputValue = document.getElementById("number-input");
+      const addNumberBtn = document.getElementById("add-number");
+      const clipboardBtn = document.getElementById("clip-board");
+      const checkNumbersBtn = document.getElementById("check-numbers");
+      const multiplyNumbersBtn = document.getElementById("multiply-numbers");
+      const paragraph2 = document.getElementById("new-arr");
+      const numbers = [];
+      function addNumber() {
+        if (inputValue.value.length !== 0) {
+          numbers.push(parseInt(inputValue.value));
+          paragraph.innerText = ` numbers in array  ${numbers.join(", ")}`;
+        } else {
+          alert("Please put a number !");
+        }
+      }
+      addNumberBtn.addEventListener("click", addNumber);
+
+      function copyToClipboard() {
+        if (inputValue.value.length !== 0) {
+          navigator.clipboard.writeText(parseInt(inputValue.value));
+          alert(inputValue.value + " Has been Copied");
+        } else {
+          alert("Please put a number !");
+        }
+      }
+      clipboardBtn.addEventListener("click", copyToClipboard);
+
+      function checkNumbers() {
+        const lessThan30 = numbers.every((n) => n < 30);
+        if (inputValue.value.length !== 0) {
+          if (lessThan30) {
+            alert("all numbers are less than 30 ");
+          } else {
+            alert("not all numbers less than 30");
+          }
+        } else {
+          alert("Please put a numbers !");
+        }
+      }
+      checkNumbersBtn.addEventListener("click", checkNumbers);
+
+      function multiplyBy3() {
+        if (inputValue.value.length !== 0) {
+          const newArr = numbers.map((n) => n * 3);
+          paragraph2.innerText = `New Array :  ${newArr.join(", ")}`;
+        } else {
+          alert("Please put a numbers !");
+        }
+      }
+      multiplyNumbersBtn.addEventListener("click", multiplyBy3);
+    </script>
+  </body>
+</html>
